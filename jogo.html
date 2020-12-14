@@ -1,0 +1,281 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="x-ua-compatible" content="ie=edge">
+  <title>Qual é a música?</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <link rel="manifest" href="site.webmanifest">
+  <link rel="apple-touch-icon" href="icon.png">
+  <link rel="stylesheet" href="css/reset.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" type="text/css" href="font/material-icons.css"> 
+  <link href="https://fonts.googleapis.com/css2?family=Abel&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Abel&family=Amatic+SC:wght@700&display=swap" rel="stylesheet">
+</head>
+<body>
+  <section class="inicio">
+    <h1>QUEM É O CANTOR?</h1>   
+    <h2>Nesse jogo o usuario terá que descobri quais são os cantores das músicas tocadas em cada fase.</h2> 
+    <button>INICIAR</button>
+  </section> <!-- end .inicio -->
+
+  <section class="jogo">  
+    <header>
+      <p>
+        <span class="mticons">star</span> 
+        ACERTOS: <span class="acertos">0</span>
+        
+      </p>
+      <p>
+        <span class="mticons">alarm</span> 
+        00:<span class="tempo">00</span>
+      </p>
+    </header>
+
+
+    <div>
+      <h1>QUEM SÃO OS CANTORES?</h1>
+      <ul>
+        <li>
+        <img class="certo" src="img/cantor1.png" >
+        </li>
+        <li>
+          <img class="errado" src="img/cantor2.png">
+        </li>
+        <li>
+          <img class="errado" src="img/cantor3.png">
+        </li>
+        <li>
+          <img class="certo"  src="img/cantor5.png">
+        </li>
+        <li>
+          <img class="errado" src="img/cantor4.png">
+        </li>
+      
+      </ul>
+
+
+    </div>
+    </section>
+
+    <!-- end .flg  .fase1  -->
+
+    <!-- pg fase2-->
+
+  <section class="fase2">
+
+    <header>
+      <p>
+        <span class="mticons">star</span> 
+        ACERTOS: <span class="acerto">0</span>
+        
+      </p>
+      <p>
+        <span class="mticons">alarm</span> 
+        00:<span class="tempo">00</span>
+      </p>
+    </header>
+
+
+
+    <div>
+      <h1>QUEM SÃO OS CANTORES?</h1>
+      <ul>
+        <li>
+        <img class="errado" src="img/mpb1.png" >
+        </li>
+        <li>
+          <img class="errado" src="img/mpb2.png">
+        </li>
+        <li>
+          <img class="errado" src="img/mpb3.png">
+        </li>
+        <li>
+          <img class="certo"  src="img/mpb7.png">
+        </li>
+        <li>
+          <img class="certo" src="img/mpb4.png">
+        </li>
+        <li>
+          <img class="certo" src="img/mpb6.png">
+        </li>
+      
+       
+      
+      </ul>
+      
+
+    </div>
+    
+  </section> 
+    
+  <!-- end .fase2  -->
+
+
+
+    <!-- pg 4- final-->
+    <section class= pgFinal>
+      <h1>Parabéns!</h1>
+      <h3>Acertos <span class="soma"></span></h3>
+      <h3>Erros: <span class="erros"></span></h3>
+      <h3>Esse foi seu tempo total: <span class="tempo"></span></h3>
+      
+
+
+    
+    </section>
+
+
+
+
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  
+
+    <script type="text/javascript"></script>
+     
+   
+    
+   
+   <script>
+
+     //trasição de tela
+     var musica= new Audio('musica/bruno.mp3');
+     var musica2= new Audio('musica/shawn.mp3');
+     $("section.inicio button").on("click", function() {
+      $("section").hide();
+      $("section.jogo").show();
+
+       musica = new Audio('musica/bruno.mp3');
+       musica.play();
+       musica2 = new Audio('musica/shawn.mp3');
+       musica2.play();
+   
+   });
+
+
+var tempo = $(".tempo").text()
+  var cronometroID = setInterval(function() {
+  tempo++;
+  $(".tempo").text(tempo);}, 1000);
+
+/* CONTAGEM FASE1*/
+
+
+  $("section.jogo div ul img.certo").one("click", function(){
+  var acertos = parseInt($("span.acertos").text());
+  somaFinal = 0;
+  var soma = 0;
+  soma = acertos + 1;
+  somaFinal=soma;
+  $("span.acertos").text(soma);
+
+  if(soma >= 2){
+    $("section").hide();
+   $("section.fase2").show();
+   musica.pause();
+   musica2.pause();
+      musica3 = new Audio('musica/jorge.mp3');
+       musica3.play();
+       musica4 = new Audio('musica/largado.mp3');
+       musica4.play();
+       musica5 = new Audio('musica/nemgraca.mp3');
+       musica5.play();
+  }
+ 
+});
+
+
+
+var erros = 0;
+$("section.jogo ul img.errado").one("click", function(){
+  
+  errosFinal=0;
+  erros = erros + 1;
+  errosFinal=soma;
+
+
+  //erros += 1;
+  $(this).css({opacity:0.5});
+
+  if(erros >= 3){
+    //trasição de tela
+    $("section").hide();
+    $("section.pgFinal").show();
+    $("section.pgFinal span.soma").text(somaFinal);
+    $("section.pgFinal span.erros").text(errosFinal);
+    clearInterval( cronometroID);
+    musica.pause();
+   musica2.pause();
+
+
+  
+   
+  }
+  });
+  
+
+  
+
+  /* CONTAGEM FASE2*/
+
+
+  $("section.fase2 div ul img.certo").one("click", function(){
+    var acerto = parseInt($("span.acerto").text());
+    var soma = 0;
+    soma = acerto + 1;
+    somaFinal += 1;
+    $("span.acerto").text(soma);
+    if(soma >= 3){
+      //trasição de tela
+      $("section").hide();
+      $("section.pgFinal").show();
+      $("section.pgFinal span.soma").text(somaFinal);
+      $("section.pgFinal span.erros").text(errosFinal);
+      clearInterval( cronometroID);
+
+      musica3.pause();
+      musica4.pause();
+      musica5.pause(); 
+    }
+
+  });
+  
+   
+  $("section.fase2 div ul img.errado").one("click", function(){
+    erros = erros + 1;
+    errosFinal += 1;
+    //erros += 1;
+    $(this).css({opacity:0.5});
+
+    if(erros > 2){
+      //trasição de tela
+      $("section").hide();
+      $("section.pgFinal").show();
+      $("section.pgFinal span.soma").text(somaFinal);
+      $("section.pgFinal span.erros").text(errosFinal);
+      clearInterval( cronometroID);
+
+      musica3.pause();
+      musica4.pause();
+      musica5.pause(); 
+    }
+    });
+
+
+
+
+
+
+
+  
+</script>
+    
+  <script src="js/plugins.js"></script>
+  <script src="js/main.js"></script>
+ 
+
+
+</body>
+</html>
